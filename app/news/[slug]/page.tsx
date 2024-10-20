@@ -7,11 +7,14 @@ import { notFound } from "next/navigation";
 type Props = {
   params: {
     slug: string;
+  };
+  searchParams: { //プレビュー用としてPageを使う時にdraftKeyが自動的にCMSから渡される
+    dk?: string;
   }
 }
 
-const Page = async ({ params }: Props) => {
-  const data = await getNewsDetail(params.slug).catch(notFound)
+const Page = async ({ params, searchParams }: Props) => {
+  const data = await getNewsDetail(params.slug, { draftKey: searchParams.dk }).catch(notFound)
   return (
     <>
       <Article data={data} />

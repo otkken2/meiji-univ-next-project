@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Category from "../Category";
 import Date from "../Date";
 import styles from "./index.module.css"
@@ -14,7 +15,9 @@ const Article = ({ data }: Props) => {
       <h1 className={styles.title}>{data.title}</h1>
       <p className={styles.description}>{data.description}</p>
       <div className={styles.meta}>
-        <Category category={data.category} />
+        <Link href={`/news/category/${data.category.id}`}>
+          <Category category={data.category} />
+        </Link>
         <Date date={data.publishedAt ?? data.createdAt} />
       </div>
       {data.thumbnail && (
